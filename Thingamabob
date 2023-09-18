@@ -1,0 +1,26 @@
+
+    [SerializeField] Vector3 displacement;
+    [SerializeField] float speed;
+
+
+    private Vector3 startPoint;
+    private Vector3 endPoint;
+    private float time;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+        //store the start and end points
+        startPoint= transform.position;
+        endPoint = startPoint + displacement;
+    }
+
+    // Fixed update is called once per frame
+    void FixedUpdate()
+    {
+      
+        time += Time.deltaTime;
+        float prop = (Mathf.Sin(time * speed) + 1) / 2;
+        GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(startPoint, endPoint, prop));
+    }
